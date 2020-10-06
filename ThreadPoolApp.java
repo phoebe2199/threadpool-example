@@ -3,12 +3,16 @@ import java.util.concurrent.ExecutorService;
 
 public class ThreadPoolApp {
 	public static void main (String[] args) {
+		//must have two arguments
 		if (args.length < 2) ThreadPoolApp.error();
 		try {
-			int numberOfJobs = Integer.parseInt(args[0]);
-			int numberOfThreads = Integer.parseInt(args[1]);
+			int numberOfJobs = Integer.parseInt(args[0]); //getting number of jobs from cmd
+			int numberOfThreads = Integer.parseInt(args[1]); //getting number of threads from cmd
+			
+			//Can't have fewer jobs than threads
 			if ((numberOfJobs < 1) || (numberOfThreads < 1)) ThreadPoolApp.error();
-			ExecutorService pool = Executors.newFixedThreadPool(numberOfThreads);
+			ExecutorService pool = Executors.newFixedThreadPool(numberOfThreads); //what is this?
+			
 			
 			Job [] jobs = new Job [numberOfJobs];
 			for (int i = 0; i < numberOfJobs; i++) {
@@ -23,7 +27,8 @@ public class ThreadPoolApp {
 	}
 	
 	private static void error() {
-		System.out.println("ThreadPoolApp must be run with two positive valued integer arguments. The first detailing" +
+		//error message - invalid arguments
+		System.out.println("ThreadPoolApp must be run with two positive valued integer arguments. The first detailing " +
 	"the number of jobs, the second the number of processing threads in the pool");
 		System.exit(0); //exit program
 	}
